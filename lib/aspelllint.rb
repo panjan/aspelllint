@@ -3,17 +3,20 @@ require 'ptools'
 
 require 'version'
 
-DEFAULT_IGNORES=%w(
+DEFAULT_IGNORES = %w(
   .git/
   .hg/
   .svn/
 )
 
+#
+# Parse, model, and print a misspelling
+#
 class Misspelling
   attr_accessor :filename, :line, :column, :word, :suggestions
 
   def self.parse(filename, aspell_line)
-    match = aspell_line.match /^\&\s(.+)\s([0-9]+)\s([0-9]+)\:\s(.+)$/
+    match = aspell_line.match(/^\&\s(.+)\s([0-9]+)\s([0-9]+)\:\s(.+)$/)
 
     w = match[1]
     l = match[2]
@@ -36,7 +39,7 @@ class Misspelling
   end
 end
 
-def recursive_list(directory, ignores = DEFAULT_IGNORES)
+def self.recursive_list(directory, ignores = DEFAULT_IGNORES)
   Find.find(directory).reject do |f|
     File.directory?(f) ||
     ignores.any? { |ignore| f =~ /#{ignore}/ } ||
@@ -49,7 +52,7 @@ def check(filename)
 
   lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-  misspellings = lines.collect { |line| Misspelling.parse(filename, line) }
+  misspellings = lines.map { |line| Misspelling.parse(filename, line) }
 
   misspellings.each { |m| puts m }
 end
