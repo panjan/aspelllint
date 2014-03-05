@@ -80,3 +80,13 @@ $ gem install aspelllint
 # LICENSE
 
 FreeBSD
+
+# DEVELOPMENT
+
+## Linting
+
+Keep the code tidy:
+
+```
+$ rake lint
+```
