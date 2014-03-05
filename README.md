@@ -6,11 +6,11 @@ https://github.com/mcandre/aspelllint
 
 # ABOUT
 
-aspelllint scans large projects for spelling errors, reporting any misspelled or unidentified words found. aspelllint borrows modern command line conventions from Reek and JSHint:
+aspelllint scans large projects for spelling errors, reporting any misspelled or unidentified words found. aspelllint uses the traditional GNU [aspell](http://aspell.net/) backend, with a frontend similar to modern linters like [Reek](https://github.com/troessner/reek/wiki) and [JSHint](http://jshint.com/).
 
 * Recursive file search by default
 * Optional ignore patterns
-* Install using programming language package manager
+* Install via a standard programming language package manager
 
 # EXAMPLE
 
