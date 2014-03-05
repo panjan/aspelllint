@@ -32,6 +32,9 @@ Usage: aspelllint [options] [<files>]
 # REQUIREMENTS
 
 * [Ruby](https://www.ruby-lang.org/) 2+
+* [aspell](http://aspell.net/)
+
+E.g., Mac users can `brew install aspell`.
 
 # INSTALL
 
