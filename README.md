@@ -33,6 +33,27 @@ examples/toy-boats.txt:46:11 baots: boats, baits, bats, bots, bahts, boots, boat
 $ aspelllint -i ".*.md" -i ".*.txt" examples/
 $
 
+$ aspell -c examples/toy-boats.txt
+I like toy [baots].
+
+1) boats                                          6) boots
+2) baits                                          7) boat's
+3) bats                                           8) bait's
+4) bots                                           9) Bates
+5) bahts                                          0) bat's
+i) Ignore                                         I) Ignore all
+r) Replace                                        R) Replace all
+a) Add                                            l) Add Lower
+b) Abort                                          x) Exit
+
+? 1
+
+$ cat examples/toy-boats.txt
+I like toy boats.
+
+$ aspelllint examples/toy-boats.txt
+$
+
 $ aspelllint -h
 Usage: aspelllint [options] [<files>]
 -i, --ignore pattern             Ignore file names matching Ruby regex pattern
