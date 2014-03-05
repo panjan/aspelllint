@@ -4,6 +4,10 @@
 
 https://github.com/mcandre/aspelllint
 
+# RUBYGEMS
+
+https://rubygems.org/gems/aspelllint
+
 # ABOUT
 
 aspelllint scans large projects for spelling errors, reporting any misspelled or unidentified words found.
