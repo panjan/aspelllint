@@ -9,7 +9,7 @@ task :install => [:gem] do
 end
 
 task :test => [:clean, :install] do
-  sh 'aspelllint examples/'
+  sh 'cucumber'
 end
 
 task :publish => [:clean, :gem] do

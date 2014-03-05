@@ -83,6 +83,14 @@ FreeBSD
 
 # DEVELOPMENT
 
+## Testing
+
+Keep the interface working:
+
+```
+$ cucumber
+```
+
 ## Linting
 
 Keep the code tidy:
