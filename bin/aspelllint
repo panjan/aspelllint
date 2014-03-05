@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+require 'find'
+require 'optparse'
+
+require 'rubygems'
+require 'aspelllint'
+
+def main
+  ignores = DEFAULT_IGNORES
+
+  filenames = ['.']
+
+  option = OptionParser.new do |option|
+    option.banner = 'Usage: aspelllint [options] [<files>]'
+
+    option.on('-i', '--ignore pattern', 'Ignore files matching Ruby regex pattern') do |pattern|
+      ignores << pattern
+    end
+
+    option.on('-h', '--help', 'Print usage info') do
+      puts option
+      exit
+    end
+
+    option.on('-v', '--version', 'Print version info') do
+      puts "aspelllint #{Aspelllint::VERSION}"
+      exit
+    end
+  end
+
+  option.parse!
+
+  filenames = ARGV unless ARGV.empty?
+
+  recursive_files = []
+
+  filenames.each do |f|
+    if File.directory? f
+      recursive_files = recursive_files.concat(recursive_list(f, ignores))
+    else
+      recursive_files << f
+    end
+  end
+
+  recursive_files.each { |f| check f }
+end
+
+begin
+  main
+rescue Interrupt
+  nil
+end
