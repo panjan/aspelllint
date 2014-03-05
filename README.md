@@ -6,7 +6,9 @@ https://github.com/mcandre/aspelllint
 
 # ABOUT
 
-aspelllint scans large projects for spelling errors, reporting any misspelled or unidentified words found. aspelllint uses the traditional GNU [aspell](http://aspell.net/) backend, with a frontend similar to modern linters like [Reek](https://github.com/troessner/reek/wiki) and [JSHint](http://jshint.com/).
+aspelllint scans large projects for spelling errors, reporting any misspelled or unidentified words found.
+
+aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.net/) backend, presenting a frontend similar to modern linters like [Reek](https://github.com/troessner/reek/wiki) and [JSHint](http://jshint.com/).
 
 * Recursive file search by default
 * Optional ignore patterns
