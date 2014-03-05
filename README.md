@@ -18,7 +18,7 @@ aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.
 
 ```
 $ cat examples/nested/memo.md
-Announcing Casual Fribsday!
+# Announcing Casual Fribsday!
 
 $ cat examples/toy-boats.txt
 I like toy baots.
