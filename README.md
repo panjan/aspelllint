@@ -17,11 +17,11 @@ aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.
 # EXAMPLES
 
 ```
-$ cat examples/toy-boats.txt
-I like toy baots.
-
 $ cat examples/nested/memo.txt
 Announcing Casual Fribsday!
+
+$ cat examples/toy-boats.txt
+I like toy baots.
 
 $ aspelllint examples/
 examples/nested/memo.txt:18:18 Fribsday: FreeBSD, Frosty, Froissart, Frost, Freebased, Fireside, Freest, Frizzed, Robust, Forest, Fairest, Arabist, Forebode, Forebodes, Freebase, Foreboded, Fieriest, Furriest
