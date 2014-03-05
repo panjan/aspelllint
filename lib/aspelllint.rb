@@ -4,9 +4,9 @@ require 'ptools'
 require 'version'
 
 DEFAULT_IGNORES=%w(
-  .git
-  .hg
-  .svn
+  .git/
+  .hg/
+  .svn/
 )
 
 class Misspelling
@@ -39,7 +39,7 @@ end
 def recursive_list(directory, ignores = DEFAULT_IGNORES)
   Find.find(directory).reject do |f|
     File.directory?(f) ||
-    ignores.any? { |ignore| f =~ /^.*#{ignore + File::SEPARATOR}.*$/ } ||
+    ignores.any? { |ignore| f =~ /#{ignore}/ } ||
     File.binary?(f)
   end
 end
