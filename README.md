@@ -17,6 +17,9 @@ aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.
 # EXAMPLES
 
 ```
+$ aspelllint examples/
+examples/toy-boats.txt:46:11 baots: boats, baits, bats, bots, bahts, boots, boat's, bait's, Bates, bat's, bates, beats, bits, bouts, Bootes, baht's, beauts, boot's, bets, bods, buts, blots, bad's, bards, bauds, bawds, beets, butts, beat's, bit's, bout's, beaut's, booty's, Batu's, bet's, bod's, Baotou's, bast's, blot's, Bert's, Burt's, bard's, baud's, bawd's, beet's, butt's
+
 $ aspelllint
 ./aspelllint.gemspec:32:20 ptools: pools, tools, stools, poodles, pool's, toils, tool's, petals, pols, patrols, prowls, stool's, polls, tolls, retools, atolls, toil's, poodle's, pedals, Patel's, petal's, pol's, Polo's, polo's, patrol's, petrol's, Poole's, prowl's, poll's, toll's, atoll's, pedal's
 ./bin/aspelllint:16:9 optparse: opt parse, opt-parse, outpace, potpies, opiates, opts, uptakes, optics, potpie's, optic's, epitaphs, optimize, optics's, opiate's, uptake's, epitaph's
