@@ -14,7 +14,7 @@ def main
   option = OptionParser.new do |option|
     option.banner = 'Usage: aspelllint [options] [<files>]'
 
-    option.on('-i', '--ignore pattern', 'Ignore files matching Ruby regex pattern') do |pattern|
+    option.on('-i', '--ignore pattern', 'Ignore file names matching Ruby regex pattern') do |pattern|
       ignores << pattern
     end
 
