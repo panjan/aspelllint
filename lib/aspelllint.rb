@@ -7,6 +7,7 @@ DEFAULT_IGNORES = %w(
   .git/
   .hg/
   .svn/
+  .png
 )
 
 #
