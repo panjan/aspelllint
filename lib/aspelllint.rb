@@ -7,6 +7,8 @@ DEFAULT_IGNORES = %w(
   .git/
   .hg/
   .svn/
+  node_modules/
+  .vagrant/
   .png
   .min.js
   -min.js
