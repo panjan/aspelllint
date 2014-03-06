@@ -33,17 +33,17 @@ def main
 
   filenames = ARGV unless ARGV.empty?
 
-  recursive_files = []
+  recursive_filenames = []
 
   filenames.each do |f|
     if File.directory? f
-      recursive_files = recursive_files.concat(recursive_list(f, ignores))
+      recursive_filenames = recursive_filenames.concat(recursive_list(f, ignores))
     else
-      recursive_files << f
+      recursive_filenames << f
     end
   end
 
-  recursive_files.each { |f| check f }
+  recursive_filenames.each { |f| check f }
 end
 
 begin

@@ -49,7 +49,7 @@ end
 
 def self.check(filename)
   begin
-    output = `sed 's/#/ /g' < #{filename} | aspell -a -c 2>&1`
+    output = `sed 's/#/ /g' #{filename} | aspell -a -c 2>&1`
 
     lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
