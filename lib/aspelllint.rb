@@ -56,6 +56,19 @@ def self.check(filename)
     misspellings = lines.map { |line| Misspelling.parse(filename, line) }
 
     misspellings.each { |m| puts m }
-  rescue Errno::EPIPE
+
+  #
+  # Invalid byte sequence in UTF-8 file.
+  # Likely a false positive text file.
+  #
+  rescue ArgumentError
+    nil
+
+  #
+  # aspelllint piped to another program (e.g. `less`),
+  # which is quit before aspelllint completes.
+  #
+  rescue Errno::EPIPE, Errno::EMFILE
+    nil
   end
 end
