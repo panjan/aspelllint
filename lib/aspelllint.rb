@@ -50,10 +50,6 @@ end
 def self.check(filename)
   output = `sed 's/#/ /g' #{filename} 2>&1 | aspell -a -c 2>&1`
 
-    lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
-
-    misspellings = lines.map { |line| Misspelling.parse(filename, line) }
-
   lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
   misspellings = lines.map { |line| Misspelling.parse(filename, line) }
