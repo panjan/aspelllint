@@ -48,27 +48,15 @@ def self.recursive_list(directory, ignores = DEFAULT_IGNORES)
 end
 
 def self.check(filename)
-  begin
-    output = `sed 's/#/ /g' #{filename} | aspell -a -c 2>&1`
+  output = `sed 's/#/ /g' #{filename} 2>&1 | aspell -a -c 2>&1`
 
     lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
     misspellings = lines.map { |line| Misspelling.parse(filename, line) }
 
-    misspellings.each { |m| puts m }
+  lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-  #
-  # Invalid byte sequence in UTF-8 file.
-  # Likely a false positive text file.
-  #
-  rescue ArgumentError
-    nil
+  misspellings = lines.map { |line| Misspelling.parse(filename, line) }
 
-  #
-  # aspelllint piped to another program (e.g. `less`),
-  # which is quit before aspelllint completes.
-  #
-  rescue Errno::EPIPE, Errno::EMFILE
-    nil
-  end
+  misspellings.each { |m| puts m }
 end
