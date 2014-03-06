@@ -7,6 +7,7 @@ DEFAULT_IGNORES = %w(
   .hg/
   .svn/
   .git/
+  .git
   .gitignore
   node_modules/
   .vagrant/
