@@ -8,6 +8,8 @@ DEFAULT_IGNORES = %w(
   .hg/
   .svn/
   .png
+  .min.js
+  -min.js
 )
 
 #
