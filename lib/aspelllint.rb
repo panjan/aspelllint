@@ -4,9 +4,10 @@ require 'ptools'
 require 'version'
 
 DEFAULT_IGNORES = %w(
-  .git/
   .hg/
   .svn/
+  .git/
+  .gitignore
   node_modules/
   .vagrant/
   Gemfile.lock
