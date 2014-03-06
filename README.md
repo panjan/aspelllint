@@ -37,7 +37,7 @@ examples/toy-boats.txt:46:11 baots: boats, baits, bats, bots, bahts, boots, boat
 $ aspelllint -i ".*.md" -i ".*.txt" examples/
 $
 
-$ aspell -c examples/toy-boats.txt
+$ aspell -x -c examples/toy-boats.txt
 I like toy [baots].
 
 1) boats                                          6) boots
