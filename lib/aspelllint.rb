@@ -9,6 +9,7 @@ DEFAULT_IGNORES = %w(
   .svn/
   node_modules/
   .vagrant/
+  Gemfile.lock
   .png
   .min.js
   -min.js
