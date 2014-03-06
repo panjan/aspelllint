@@ -12,6 +12,8 @@ DEFAULT_IGNORES = %w(
   .vagrant/
   Gemfile.lock
   .png
+  .jpg
+  .jpeg
   .svg
   .min.js
   -min.js
