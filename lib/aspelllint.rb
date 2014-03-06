@@ -47,12 +47,15 @@ def self.recursive_list(directory, ignores = DEFAULT_IGNORES)
   end
 end
 
-def check(filename)
-  output = `sed 's/#/ /g' < #{filename} | aspell -a -c 2>&1`
+def self.check(filename)
+  begin
+    output = `sed 's/#/ /g' < #{filename} | aspell -a -c 2>&1`
 
-  lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
+    lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-  misspellings = lines.map { |line| Misspelling.parse(filename, line) }
+    misspellings = lines.map { |line| Misspelling.parse(filename, line) }
 
-  misspellings.each { |m| puts m }
+    misspellings.each { |m| puts m }
+  rescue Errno::EPIPE
+  end
 end
