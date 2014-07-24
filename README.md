@@ -102,3 +102,7 @@ Keep the code tidy:
 ```
 $ rake lint
 ```
+
+## Git Hooks
+
+See `hooks/`.
