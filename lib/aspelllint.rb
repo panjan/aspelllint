@@ -12,6 +12,8 @@ DEFAULT_IGNORES = %w(
   node_modules/
   .vagrant/
   Gemfile.lock
+  .exe
+  .bin
   .png
   .jpg
   .jpeg
