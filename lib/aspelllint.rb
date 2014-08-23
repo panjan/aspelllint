@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'ptools'
+require 'tempfile'
 
 require 'version'
+
+$stdout.sync = true
 
 DEFAULT_IGNORES = %w(
   .hg/
@@ -59,6 +62,27 @@ def self.recursive_list(directory, ignores = DEFAULT_IGNORES)
     File.binary?(f)
   end
 end
+
+def self.check_stdin
+  contents = $stdin.read
+
+  t = Tempfile.new('aspelllint')
+  t.write(contents)
+  t.close
+
+  filename = t.path
+
+  output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
+
+  lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
+
+  misspellings = lines.map { |line| Misspelling.parse('stdin', line) }
+
+  misspellings.each { |m| puts m }
+
+  t.delete
+end
+
 
 def self.check(filename)
   output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`

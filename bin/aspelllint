@@ -9,7 +9,7 @@ require 'aspelllint'
 def main
   ignores = DEFAULT_IGNORES
 
-  filenames = ['.']
+  filenames = []
 
   option = OptionParser.new do |option|
     option.banner = 'Usage: aspelllint [options] [<files>]'
@@ -33,17 +33,21 @@ def main
 
   filenames = ARGV unless ARGV.empty?
 
-  recursive_filenames = []
+  if filenames.empty? || filenames == ['-'] then
+    check_stdin
+  else
+    recursive_filenames = []
 
-  filenames.each do |f|
-    if File.directory? f
-      recursive_filenames = recursive_filenames.concat(recursive_list(f, ignores))
-    else
-      recursive_filenames << f
+    filenames.each do |f|
+      if File.directory? f
+        recursive_filenames = recursive_filenames.concat(recursive_list(f, ignores))
+      else
+        recursive_filenames << f
+      end
     end
-  end
 
-  recursive_filenames.each { |f| check f }
+    recursive_filenames.each { |f| check f }
+  end
 end
 
 begin
