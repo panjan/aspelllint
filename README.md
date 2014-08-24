@@ -65,7 +65,7 @@ $ aspelllint examples/toy-boats.txt
 $
 
 $ aspelllint -h
-Usage: aspelllint [options] [<files>]
+Usage: aspelllint [options] [<files>|-]
 -i, --ignore pattern             Ignore file names matching Ruby regex pattern
 -h, --help                       Print usage info
 -v, --version                    Print version info

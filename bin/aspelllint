@@ -12,7 +12,7 @@ def main
   filenames = []
 
   option = OptionParser.new do |option|
-    option.banner = 'Usage: aspelllint [options] [<files>]'
+    option.banner = 'Usage: aspelllint [options] [<files>|-]'
 
     option.on('-i', '--ignore pattern', 'Ignore file names matching Ruby regex pattern') do |pattern|
       ignores << pattern
