@@ -83,7 +83,6 @@ def self.check_stdin
   t.delete
 end
 
-
 def self.check(filename)
   output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
 
