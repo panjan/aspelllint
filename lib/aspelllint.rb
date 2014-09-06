@@ -10,6 +10,7 @@ DEFAULT_IGNORES = %w(
   \.hg/
   \.svn/
   \.git/
+  \.aspelllintignore
   \.gtdlintignore
   \.gtdlintrc\.yml
   node_modules/

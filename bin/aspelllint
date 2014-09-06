@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
 require 'find'
 require 'optparse'
-
-require 'rubygems'
+require 'yaml'
 require 'aspelllint'
+
+IGNORE_FILENAME = '.aspelllintignore'
 
 def main
   ignores = DEFAULT_IGNORES
@@ -46,7 +48,25 @@ def main
       end
     end
 
-    recursive_filenames.each { |f| check f }
+    recursive_filenames.each do |f|
+      dir = File.expand_path("..", f)
+
+      parent_of_home = File.expand_path("..", ENV["HOME"])
+
+      while dir != parent_of_home
+        ignore_file = dir + File::SEPARATOR + IGNORE_FILENAME
+
+        if File.exist?(ignore_file) then
+          ignores.concat(open(ignore_file).read.split("\n"))
+        end
+
+        dir = File.expand_path("..", dir)
+      end
+
+      if ignores.none? { |ignore| f =~ %r(#{ignore}) } then
+        check(f)
+      end
+    end
   end
 end
 

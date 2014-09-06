@@ -16,6 +16,7 @@ aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.
 
 * Recursive file search by default
 * Optional ignore patterns
+* Configuration via per-project and per-user [dotfiles](https://github.com/mcandre/aspelllint/blob/master/CONFIGURE.md#dotfiles)
 * Install via a standard programming language package manager
 
 # EXAMPLES
