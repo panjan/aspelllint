@@ -7,22 +7,42 @@ require 'version'
 $stdout.sync = true
 
 DEFAULT_IGNORES = %w(
-  .hg/
-  .svn/
-  .git/
-  .git
-  .gitignore
+  \.hg/
+  \.svn/
+  \.git/
+  \.gtdlintignore
+  \.gtdlintrc\.yml
   node_modules/
-  .vagrant/
+  \.vagrant/
   Gemfile.lock
-  .exe
-  .bin
-  .png
-  .jpg
-  .jpeg
-  .svg
-  .min.js
-  -min.js
+  \.exe
+  \.bin
+  \.class
+  \.zip
+  \.jar
+  \.war
+  \.xpi
+  \.dmg
+  \.app
+  \.xcodeproj/
+  \.lproj/
+  \.xcassets/
+  \.pmdoc/
+  \.dSYM/
+  \.jad
+  \.cmo
+  \.cmi
+  \.png
+  \.gif
+  \.jpg
+  \.jpeg
+  \.tiff
+  \.ico
+  \.svg
+  \.dot
+  \.wav
+  \.min.js
+  -min\.js
 )
 
 #
