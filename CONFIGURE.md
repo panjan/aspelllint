@@ -15,7 +15,7 @@ Run `aspelllint -h` or `aspelllint --help` for a full list, or refer to the sour
 ```
 $ aspelllint -h
 Usage: aspelllint [options] [<files>]
-    -i, --ignore pattern             Ignore file names matching Ruby regex pattern
+    -i, --ignore pattern             Ignore file pattern (fnmatch)
     -h, --help                       Print usage info
     -v, --version                    Print version info
 ```
@@ -30,4 +30,4 @@ Samples:
 
 * [examples/.aspelllintignore](https://github.com/mcandre/aspelllint/blob/master/examples/.aspelllintignore)
 
-An `.aspelllintignore` may contain Ruby regex patterns of files and/or folders to exclude from scanning, one pattern per line.
+An `.aspelllintignore` may contain fnmatch patterns of files and/or folders to exclude from scanning, one pattern per line.

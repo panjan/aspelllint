@@ -3,10 +3,8 @@
 require 'rubygems'
 require 'find'
 require 'optparse'
-require 'yaml'
+require 'dotsmack'
 require 'aspelllint'
-
-IGNORE_FILENAME = '.aspelllintignore'
 
 def main
   ignores = DEFAULT_IGNORES
@@ -16,7 +14,7 @@ def main
   option = OptionParser.new do |option|
     option.banner = 'Usage: aspelllint [options] [<files>|-]'
 
-    option.on('-i', '--ignore pattern', 'Ignore file names matching Ruby regex pattern') do |pattern|
+    option.on('-i', '--ignore pattern', 'Ignore file pattern (fnmatch)') do |pattern|
       ignores << pattern
     end
 
@@ -33,39 +31,23 @@ def main
 
   option.parse!
 
-  filenames = ARGV unless ARGV.empty?
-
-  if filenames.empty? || filenames == ['-'] then
-    check_stdin
-  else
-    recursive_filenames = []
-
-    filenames.each do |f|
-      if File.directory? f
-        recursive_filenames = recursive_filenames.concat(recursive_list(f, ignores))
-      else
-        recursive_filenames << f
-      end
+  filenames =
+    if ARGV == []
+      ['-']
+    else
+      ARGV
     end
 
-    recursive_filenames.each do |f|
-      dir = File.expand_path("..", f)
+  dotsmack = Dotsmack::Smacker.new(
+    dotignore = '.aspelllintignore',
+    additional_ignores = ignores
+  )
 
-      parent_of_home = File.expand_path("..", ENV["HOME"])
-
-      while dir != parent_of_home
-        ignore_file = dir + File::SEPARATOR + IGNORE_FILENAME
-
-        if File.exist?(ignore_file) then
-          ignores.concat(open(ignore_file).read.split("\n"))
-        end
-
-        dir = File.expand_path("..", dir)
-      end
-
-      if ignores.none? { |ignore| f =~ %r(#{ignore}) } then
-        check(f)
-      end
+  dotsmack.enumerate(filenames).each do |filename, _|
+    if filename == '-'
+      check_stdin
+    else
+      check(filename)
     end
   end
 end

@@ -7,50 +7,49 @@ require 'version'
 $stdout.sync = true
 
 DEFAULT_IGNORES = %w(
-  \.hg/
-  \.svn/
-  \.git/
-  \.aspelllintignore
-  \.gtdlintignore
-  \.gtdlintrc\.yml
+  .hg/
+  .svn/
+  .git/
+  .aspelllintignore
+  .gtdlintignore
+  .gtdlintrc.yml
   node_modules/
   bower_components/
   target/
   dist/
-  \.vagrant/
+  .vagrant/
   Gemfile.lock
-  \.exe
-  \.bin
-  \.apk
-  \.ap_
+  *.exe
+  *.bin
+  *.apk
+  *.ap_
   res/
-  \.class
-  \.zip
-  \.jar
-  \.war
-  \.xpi
-  \.dmg
-  \.pkg
-  \.app
-  \.xcodeproj/
-  \.lproj/
-  \.xcassets/
-  \.pmdoc/
-  \.dSYM/
-  \.jad
-  \.cmo
-  \.cmi
-  \.png
-  \.gif
-  \.jpg
-  \.jpeg
-  \.tiff
-  \.ico
-  \.svg
-  \.dot
-  \.wav
-  \.min.js
-  -min\.js
+  *.class
+  *.zip
+  *.jar
+  *.war
+  *.xpi
+  *.dmg
+  *.pkg
+  *.app
+  *.xcodeproj/
+  *.lproj/
+  *.xcassets/
+  *.pmdoc/
+  *.dSYM/
+  *.jad
+  *.cmo
+  *.cmi
+  *.png
+  *.gif
+  *.jpg
+  *.jpeg
+  *.tiff
+  *.ico
+  *.svg
+  *.dot
+  *.wav
+  *[.-]min.*
 )
 
 #
@@ -80,14 +79,6 @@ class Misspelling
 
   def to_s
     "#{filename}:#{line}:#{column} #{word}: #{suggestions}"
-  end
-end
-
-def self.recursive_list(directory, ignores = DEFAULT_IGNORES)
-  Find.find(directory).reject do |f|
-    File.directory?(f) ||
-    ignores.any? { |ignore| f =~ /#{ignore}/ } ||
-    File.binary?(f)
   end
 end
 
