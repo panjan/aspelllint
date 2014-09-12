@@ -1,29 +1,26 @@
-require 'rubygems'
 require 'ptools'
 require 'tempfile'
 
 require 'version'
 
-$stdout.sync = true
-
 DEFAULT_IGNORES = %w(
-  .hg/
-  .svn/
-  .git/
+  .hg
+  .svn
+  .git
   .aspelllintignore
   .gtdlintignore
   .gtdlintrc.yml
-  node_modules/
-  bower_components/
-  target/
-  dist/
-  .vagrant/
+  node_modules
+  bower_components
+  target
+  dist
+  .vagrant
   Gemfile.lock
   *.exe
   *.bin
   *.apk
   *.ap_
-  res/
+  res
   *.class
   *.zip
   *.jar
@@ -32,11 +29,11 @@ DEFAULT_IGNORES = %w(
   *.dmg
   *.pkg
   *.app
-  *.xcodeproj/
-  *.lproj/
-  *.xcassets/
-  *.pmdoc/
-  *.dSYM/
+  *.xcodeproj
+  *.lproj
+  *.xcassets
+  *.pmdoc
+  *.dSYM
   *.jad
   *.cmo
   *.cmi
