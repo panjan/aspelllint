@@ -74,7 +74,7 @@ Usage: aspelllint [options] [<files>|-]
 
 # REQUIREMENTS
 
-* [Ruby](https://www.ruby-lang.org/) 2+
+* [Ruby](https://www.ruby-lang.org/) 2.0+
 * [aspell](http://aspell.net/)
 * [sed](http://www.gnu.org/software/sed/)
 
