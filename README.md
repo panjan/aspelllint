@@ -1,23 +1,6 @@
 # aspelllint - spell check for large projects
 
-# HOMEPAGE
-
-https://github.com/mcandre/aspelllint
-
-# RUBYGEMS
-
-https://rubygems.org/gems/aspelllint
-
-# ABOUT
-
-aspelllint scans large projects for spelling errors, reporting any misspelled or unidentified words found.
-
-aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.net/) backend, presenting a frontend similar to modern linters like [Reek](https://github.com/troessner/reek/wiki) and [JSHint](http://jshint.com/).
-
-* Recursive file scanning, like `jshint .`
-* Optional ignore patterns, like `.gitignore`
-* Configuration via per-project and per-user [dotfiles](https://github.com/mcandre/aspelllint/blob/master/CONFIGURE.md#dotfiles)
-* Install via a standard programming language package manager
+Aspelllint searches your projects for spelling errors.
 
 # EXAMPLES
 
@@ -71,6 +54,25 @@ Usage: aspelllint [options] [<files>|-]
 -h, --help                       Print usage info
 -v, --version                    Print version info
 ```
+
+# HOMEPAGE
+
+https://github.com/mcandre/aspelllint
+
+# RUBYGEMS
+
+https://rubygems.org/gems/aspelllint
+
+# ABOUT
+
+aspelllint scans large projects for spelling errors, reporting any misspelled or unidentified words found.
+
+aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.net/) backend, presenting a frontend similar to modern linters like [Reek](https://github.com/troessner/reek/wiki) and [JSHint](http://jshint.com/).
+
+* Recursive file scanning, like `jshint .`
+* Optional ignore patterns, like `.gitignore`
+* Configuration via per-project and per-user [dotfiles](https://github.com/mcandre/aspelllint/blob/master/CONFIGURE.md#dotfiles)
+* Install via a standard programming language package manager
 
 # REQUIREMENTS
 
