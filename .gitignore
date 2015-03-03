@@ -5,3 +5,4 @@ Thumbs.db
 tmp/
 *.bak
 *.new
+node_modules/
