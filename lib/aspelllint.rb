@@ -90,21 +90,29 @@ def self.check_stdin
 
   output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
 
-  lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
+  if output =~ /aspell\: command not found/m
+    puts 'aspell: command not found'
+  else
+    lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-  misspellings = lines.map { |line| Misspelling.parse('stdin', line) }
+    misspellings = lines.map { |line| Misspelling.parse('stdin', line) }
 
-  misspellings.each { |m| puts m }
+    misspellings.each { |m| puts m }
 
-  t.delete
+    t.delete
+  end
 end
 
 def self.check(filename)
   output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
 
-  lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
+  if output =~ /aspell\: command not found/m
+    puts 'aspell: command not found'
+  else
+    lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-  misspellings = lines.map { |line| Misspelling.parse(filename, line) }
+    misspellings = lines.map { |line| Misspelling.parse(filename, line) }
 
-  misspellings.each { |m| puts m }
+    misspellings.each { |m| puts m }
+  end
 end
