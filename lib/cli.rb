@@ -28,14 +28,16 @@ module Aspelllint
     begin
       options = Docopt::docopt(USAGE, version: Aspelllint::VERSION)
 
-      require 'pp'
-      pp options
-
       if options['--ignore']
         ignores = ignores.concat(options['--ignore'])
       end
 
       filenames = options['<file>']
+
+      # Work around https://github.com/docopt/docopt/issues/274
+      if filenames == []
+        filenames = ['-']
+      end
 
       dotsmack = Dotsmack::Smacker.new(
         dotignore = '.aspelllintignore',
