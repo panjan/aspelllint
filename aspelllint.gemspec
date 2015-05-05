@@ -18,6 +18,7 @@ Gem::Specification.new { |s|
 
   s.required_ruby_version = '>= 2.0'
 
+  s.add_dependency 'docopt', '~> 0.5'
   s.add_dependency 'ptools', '~> 1.2'
   s.add_dependency 'dotsmack', '~> 0.3'
 

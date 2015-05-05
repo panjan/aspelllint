@@ -1,7 +1,7 @@
 Given(/^the program has finished$/) do
   @cucumber = `aspelllint examples/`
   @cucumber_ignores = `aspelllint -i '*.md' examples/`
-  @cucumber_stdin = `cat examples/toy-boats.txt | aspelllint`
+  @cucumber_stdin = `aspelllint < examples/toy-boats.txt`
 end
 
 Then(/^the output is correct for each test$/) do

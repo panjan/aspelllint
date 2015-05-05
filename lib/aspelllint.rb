@@ -1,7 +1,8 @@
+require_relative 'version'
+require_relative 'cli'
+
 require 'ptools'
 require 'tempfile'
-
-require_relative 'version'
 
 DEFAULT_IGNORES = %w(
   .hg
@@ -79,40 +80,42 @@ class Misspelling
   end
 end
 
-def self.check_stdin
-  contents = $stdin.read
+module Aspelllint
+  def self.check_stdin
+    contents = $stdin.read
 
-  t = Tempfile.new('aspelllint')
-  t.write(contents)
-  t.close
+    t = Tempfile.new('aspelllint')
+    t.write(contents)
+    t.close
 
-  filename = t.path
+    filename = t.path
 
-  output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
+    output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
 
-  if output =~ /aspell\: command not found/m
-    puts 'aspell: command not found'
-  else
-    lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
+    if output =~ /aspell\: command not found/m
+      puts 'aspell: command not found'
+    else
+      lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-    misspellings = lines.map { |line| Misspelling.parse('stdin', line) }
+      misspellings = lines.map { |line| Misspelling.parse('stdin', line) }
 
-    misspellings.each { |m| puts m }
+      misspellings.each { |m| puts m }
 
-    t.delete
+      t.delete
+    end
   end
-end
 
-def self.check(filename)
-  output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
+  def self.check(filename)
+    output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
 
-  if output =~ /aspell\: command not found/m
-    puts 'aspell: command not found'
-  else
-    lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
+    if output =~ /aspell\: command not found/m
+      puts 'aspell: command not found'
+    else
+      lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-    misspellings = lines.map { |line| Misspelling.parse(filename, line) }
+      misspellings = lines.map { |line| Misspelling.parse(filename, line) }
 
-    misspellings.each { |m| puts m }
+      misspellings.each { |m| puts m }
+    end
   end
 end
