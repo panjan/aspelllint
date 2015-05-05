@@ -62,5 +62,9 @@ module Aspelllint
     rescue Docopt::Exit => e
       puts e.message
     end
+  rescue Interrupt
+    nil
+  rescue Errno::EPIPE, Errno::EMFILE
+    nil
   end
 end

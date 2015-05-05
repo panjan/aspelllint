@@ -1,11 +1,3 @@
 #!/usr/bin/env ruby
-require 'rubygems'
 require 'aspelllint'
-
-begin
-  Aspelllint::main
-rescue Interrupt
-  nil
-rescue Errno::EPIPE, Errno::EMFILE
-  nil
-end
+Aspelllint::main
