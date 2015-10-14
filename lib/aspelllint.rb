@@ -88,24 +88,12 @@ module Aspelllint
     t.write(contents)
     t.close
 
-    filename = t.path
-
-    output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
-
-    if output =~ /aspell\: command not found/m
-      puts 'aspell: command not found'
-    else
-      lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
-
-      misspellings = lines.map { |line| Misspelling.parse('stdin', line) }
-
-      misspellings.each { |m| puts m }
-
-      t.delete
-    end
+    check(t.path, 'stdin')
+  ensure
+    t.delete
   end
 
-  def self.check(filename)
+  def self.check(filename, original_name = filename)
     output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
 
     if output =~ /aspell\: command not found/m
@@ -113,7 +101,7 @@ module Aspelllint
     else
       lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
 
-      misspellings = lines.map { |line| Misspelling.parse(filename, line) }
+      misspellings = lines.map { |line| Misspelling.parse(original_name, line) }
 
       misspellings.each { |m| puts m }
     end
