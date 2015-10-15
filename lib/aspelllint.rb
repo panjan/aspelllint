@@ -3,6 +3,7 @@ require_relative 'cli'
 
 require 'ptools'
 require 'tempfile'
+require 'English'
 
 DEFAULT_IGNORES = %w(
   .hg
@@ -88,34 +89,24 @@ module Aspelllint
     t.write(contents)
     t.close
 
-    filename = t.path
+    check(t.path, 'stdin')
+  ensure
+    t.delete
+  end
 
-    output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
-
-    if output =~ /aspell\: command not found/m
-      puts 'aspell: command not found'
-    else
-      lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
-
-      misspellings = lines.map { |line| Misspelling.parse('stdin', line) }
-
-      misspellings.each { |m| puts m }
-
-      t.delete
+  def self.executable_in_path?(name)
+    ENV['PATH'].split(File::PATH_SEPARATOR).any? do |path|
+      File.executable?(File.join(path, name))
     end
   end
 
-  def self.check(filename)
+  def self.check(filename, original_name = filename)
+    fail 'aspell not found in PATH' unless executable_in_path?('aspell')
     output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
+    fail('aspell failed: ' << output) unless $CHILD_STATUS.success?
 
-    if output =~ /aspell\: command not found/m
-      puts 'aspell: command not found'
-    else
-      lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
-
-      misspellings = lines.map { |line| Misspelling.parse(filename, line) }
-
-      misspellings.each { |m| puts m }
-    end
+    lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
+    misspellings = lines.map { |line| Misspelling.parse(original_name, line) }
+    misspellings.each { |m| puts m }
   end
 end
