@@ -76,7 +76,7 @@ aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.
 
 # REQUIREMENTS
 
-* [Ruby](https://www.ruby-lang.org/) 2.0+
+* [Ruby](https://www.ruby-lang.org/) 2.3+
 * [aspell](http://aspell.net/)
 * [sed](http://www.gnu.org/software/sed/)
 

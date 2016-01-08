@@ -4,7 +4,7 @@ Gem::Specification.new { |s|
   s.name = 'aspelllint'
   s.summary = 'spell check for large projects'
   s.description = 'See README.md for example usage'
-  s.license = 'FreeBSD'
+  s.license = 'BSD-2-Clause-FreeBSD'
 
   s.version = Aspelllint::VERSION
 
@@ -16,7 +16,7 @@ Gem::Specification.new { |s|
   s.files = Dir['lib/*.rb'] + ['LICENSE.md']
   s.homepage = 'https://github.com/mcandre/aspelllint'
 
-  s.required_ruby_version = '>= 2.0'
+  s.required_ruby_version = '>= 2.3'
 
   s.add_dependency 'docopt', '~> 0.5'
   s.add_dependency 'ptools', '~> 1.2'
