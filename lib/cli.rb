@@ -5,10 +5,33 @@ require 'optparse'
 require 'dotsmack'
 
 require 'docopt'
+require 'json'
+
+STAT_HEADER = <<-eos
+{
+  "statVersion": "0.4.0",
+  "process": {
+    "name": "Spell check for large projects",
+    "version": "#{Aspelllint::VERSION}",
+    "description": "Aspelllint searches your projects for spelling errors",
+    "maintainer": "Andrew Pennebaker",
+    "email": "andrew.pennebaker@gmail.com",
+    "website": "https://github.com/mcandre/aspelllint",
+    "repeatability": "Associative"
+  },
+  "findings": [
+eos
+
+STAT_FOOTER = <<-eos
+
+  ]
+}
+eos
 
 USAGE = <<DOCOPT
 Usage:
-  aspelllint [-i <pattern>]... [<file>]...
+  aspelllint [options] [-i <pattern>]... [<file>]...
+  aspelllint -s | --stat
   aspelllint -v | --version
   aspelllint -h | --help
 
@@ -17,6 +40,7 @@ Arguments:
 
 Options:
   -i --ignore <pattern>  Ignore file pattern (fnmatch)
+  -s --stat              Output in STAT
   -v --version           Print version info
   -h --help              Print usage info
 DOCOPT
@@ -34,6 +58,8 @@ module Aspelllint
 
       filenames = options['<file>']
 
+      is_stat = options['--stat']
+
       # Work around https://github.com/docopt/docopt/issues/274
       if filenames == []
         filenames = ['-']
@@ -43,13 +69,22 @@ module Aspelllint
         dotignore = '.aspelllintignore',
         additional_ignores = ignores
       )
-
+      finding_count = 0
       dotsmack.enumerate(filenames).each do |filename, _|
         begin
           if filename == '-'
             Aspelllint::check_stdin
           else
-            Aspelllint::check(filename)
+            if !is_stat
+              Aspelllint::check(filename)
+            else
+              Aspelllint::check(filename, filename, is_stat ) { |finding|
+                puts STAT_HEADER if finding_count == 0
+                puts ',' if finding_count > 0
+                print JSON.pretty_generate(finding).lines.map { |line| '    ' + line }.join
+                finding_count += 1
+              }
+            end
           end
         #
         # Invalid byte sequence in UTF-8 file.
@@ -59,6 +94,11 @@ module Aspelllint
           nil
         end
       end
+
+      if is_stat && finding_count > 0
+        puts STAT_FOOTER
+      end
+
     rescue Docopt::Exit => e
       puts e.message
     end
