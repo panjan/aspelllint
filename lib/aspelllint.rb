@@ -79,6 +79,36 @@ class Misspelling
   def to_s
     "#{filename}:#{line}:#{column} #{word}: #{suggestions}"
   end
+
+  def to_finding
+    {
+        :failure => true,
+        :rule => 'Spelling error',
+        :description => "Observed word: #{word}",
+        :categories => [
+            'Bug Risk'
+        ],
+        :location => {
+            :path => "#{filename}",
+            :beginLine => "#{line}",
+        },
+        :fixes => generate_fixes
+    }
+  end
+    def generate_fixes
+      f = []
+      suggestions.split(', ').each { |w|
+        f <<
+          {
+                :location => {
+                    :path => "#{filename}",
+                    :beginLine => "#{line}",
+                },
+                :newText => "#{w}"
+            }
+      }
+      return f
+    end
 end
 
 module Aspelllint
@@ -100,13 +130,20 @@ module Aspelllint
     end
   end
 
-  def self.check(filename, original_name = filename)
+  def self.check(filename, original_name = filename, is_stat = false)
     fail 'aspell not found in PATH' unless executable_in_path?('aspell')
     output = `sed 's/#/ /g' "#{filename}" 2>&1 | aspell -a -c 2>&1`
     fail('aspell failed: ' << output) unless $CHILD_STATUS.success?
 
     lines = output.split("\n").select { |line| line =~ /^\&\s.+$/ }
     misspellings = lines.map { |line| Misspelling.parse(original_name, line) }
-    misspellings.each { |m| puts m }
+
+    if is_stat
+      misspellings.each { |finding|
+            yield finding.to_finding if block_given?
+        }
+    else
+      misspellings.each { |m| puts m }
+    end
   end
 end
