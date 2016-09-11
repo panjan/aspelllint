@@ -2,6 +2,7 @@ Given(/^the program has finished$/) do
   @cucumber = `aspelllint examples/`
   @cucumber_ignores = `aspelllint -i '*.md' examples/`
   @cucumber_stdin = `aspelllint < examples/toy-boats.txt`
+  @cucumber_stat = `aspelllint -s examples/`
 end
 
 Then(/^the output is correct for each test$/) do
@@ -17,4 +18,21 @@ Then(/^the output is correct for each test$/) do
   cucumber_lines_stdin = @cucumber_stdin.split("\n")
   expect(cucumber_lines_stdin.length).to eq(1)
   expect(cucumber_lines_stdin[0]).to match(%r(^stdin\:.+baots.+$))
+
+  lines_stat = @cucumber_stat
+  expect(valid_json?(lines_stat)).to eq(true)
+
+  json = JSON.parse(lines_stat)
+  expect(json['findings'].length).to eq(2)
+  expect(json['findings'][0]['location']['path']).to match('examples/nested/memo.md')
+  expect(json['findings'][1]['location']['path']).to match('examples/toy-boats.txt')
+end
+
+def valid_json?(json)
+  begin
+    JSON.parse(json)
+    return true
+  rescue JSON::ParserError => e
+    return false
+  end
 end
