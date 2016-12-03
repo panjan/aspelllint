@@ -38,4 +38,5 @@ Gem::Specification.new { |s|
   s.add_development_dependency 'cucumber', '~> 1.3'
   s.add_development_dependency 'cowl', '~> 0.2'
   s.add_development_dependency 'lili', '~> 0.2'
+  s.add_development_dependency 'shlint', '~> 0.1.6'
 }

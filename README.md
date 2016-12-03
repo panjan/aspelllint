@@ -80,7 +80,10 @@ aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.
 * [aspell](http://aspell.net/)
 * [sed](http://www.gnu.org/software/sed/)
 
-E.g., Mac users can `brew install aspell`.
+## Optional
+
+* [shlint](https://rubygems.org/gems/shlint)
+* [shellcheck](http://hackage.haskell.org/package/ShellCheck)
 
 # INSTALL
 
