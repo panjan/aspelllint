@@ -64,15 +64,15 @@ task :editorconfig=> [] do
 end
 
 task :shlint => [] do
-  sh 'find . -type f -name \'*.sh\' -o -type f -name \'*.bashrc*\' -o -type f -name \'.*profile*\' -o -type f -name \'*.envrc*\' | xargs shlint'
+  sh 'find . \( -wholename \'*/node_modules*\' \) -prune -o -type f \( -name \'*.sh\' -o -name \'*.bashrc*\' -o -name \'.*profile*\' -o -name \'*.envrc*\' \) -print | xargs shlint'
 end
 
 task :checkbashisms => [] do
-  sh 'find . -type f -name \'*.sh\' -o -type f -name \'*.bashrc*\' -o -type f -name \'.*profile*\' -o -type f -name \'*.envrc*\' | xargs checkbashisms -n -p'
+  sh 'find . \( -wholename \'*/node_modules*\' \) -prune -o -type f \( -name \'*.sh\' -o -name \'*.bashrc*\' -o -name \'.*profile*\' -o -name \'*.envrc*\' \) -print | xargs checkbashisms -n -p'
 end
 
 task :shellcheck => [] do
-  sh 'find . -type f -name \'*.sh\' -o -type f -name \'*.bashrc*\' -o -type f -name \'.*profile*\' -o -type f -name \'*.envrc*\' | xargs shellcheck'
+  sh 'find . \( -wholename \'*/node_modules*\' \) -prune -o -type f \( -name \'*.sh\' -o -name \'*.bashrc*\' -o -name \'.*profile*\' -o -name \'*.envrc*\' \) -print | xargs shellcheck'
 end
 
 task :lint => [
