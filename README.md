@@ -76,12 +76,14 @@ aspelllint is a shell wrapper around the traditional GNU [aspell](http://aspell.
 
 # REQUIREMENTS
 
-* [Ruby](https://www.ruby-lang.org/) 2.3+
+* [ruby](https://www.ruby-lang.org/) 2.3+
 * [aspell](http://aspell.net/)
 * [sed](http://www.gnu.org/software/sed/)
 
 ## Optional
 
+* [pargs](https://github.com/mcandre/pargs)
+* [editorconfig-tools](https://www.npmjs.com/package/editorconfig-tools)
 * [shlint](https://rubygems.org/gems/shlint)
 * [shellcheck](http://hackage.haskell.org/package/ShellCheck)
 
